@@ -3,11 +3,12 @@ const cors = require('cors');
 
 const app = express();
 
-const allowedOrigins = ['https://agreeable-beach-0cb423010.5.azurestaticapps.net']
+const allowedOrigins = ['https://agreeable-beach-0cb423010.5.azurestaticapps.net'];
 
 app.use(cors({ 
     origin: allowedOrigins,
-    methods: ['GET', 'POST']
+    methods: ['GET', 'POST'],
+    credentials: true
 }));
 
 function rollDice() {
@@ -27,7 +28,7 @@ function getDiceFace(diceValue) {
 }
 
 app.get('/', (req, res) => {
-    res.status(200).send('Server Dice Roller API - Jason Yescas 2024');
+    res.status(200).send('Server Dice Roller API');
 });
 
 app.get('/roll-dice', (req, res) => {
