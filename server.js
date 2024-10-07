@@ -2,9 +2,13 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.use(cors({ origin: 'https://agreeable-beach-0cb423010.5.azurestaticapps.net' }));
+const allowedOrigins = ['https://agreeable-beach-0cb423010.5.azurestaticapps.net']
+
+app.use(cors({ 
+    origin: allowedOrigins,
+    methods: ['GET', 'POST']
+}));
 
 function rollDice() {
     return Math.floor(Math.random() * 6) + 1;
@@ -21,6 +25,10 @@ function getDiceFace(diceValue) {
     ];
     return faces[diceValue - 1];
 }
+
+app.get('/', (req, res) => {
+    res.status(200).send('Server Dice Roller API - Jason Yescas 2024');
+});
 
 app.get('/roll-dice', (req, res) => {
     const die1 = rollDice();
@@ -46,6 +54,7 @@ app.get('/api/ping', (req, res) => {
     res.send('pong');
 });
 
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log('Server running...');
 });
