@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: 'https://agreeable-beach-0cb423010.5.azurestaticapps.net' }));
 
 function rollDice() {
     return Math.floor(Math.random() * 6) + 1;
